@@ -1,10 +1,3 @@
-//
-//  BalanceCell.swift
-//  TestCell
-//
-//  Created by Bruno Silva on 07/06/22.
-//
-
 import UIKit
 
 final class BalanceCell: UITableViewCell {
@@ -42,6 +35,7 @@ final class BalanceCell: UITableViewCell {
     }
     
     // MARK: - Public Methods
+    
     func setupCell(title: String, value: String) {
         titleLabel.text = title
         valueLabel.text = value
@@ -66,8 +60,7 @@ final class BalanceCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            valueLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            valueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             valueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
         ])
     }

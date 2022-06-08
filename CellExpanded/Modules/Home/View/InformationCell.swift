@@ -93,7 +93,7 @@ final class InformationCell: UITableViewCell {
         NSLayoutConstraint.activate([
             valueMultilimitLabel.topAnchor.constraint(equalTo: multilimitLabel.bottomAnchor, constant: 10),
             valueMultilimitLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            valueMultilimitLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 10),
+            valueMultilimitLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
     }
 }
