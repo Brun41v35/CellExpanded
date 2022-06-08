@@ -12,11 +12,11 @@ class Model {
 
 class cellData: Model {
     var hasAction: Bool
-    var opened: Bool?
+    var opened: Bool
     var title: String
     var children: [AccordionChild]
     
-    init(name: String, surname: String, hasAction: Bool, opened: Bool?, title: String, children: [AccordionChild]) {
+    init(name: String, surname: String, hasAction: Bool, opened: Bool, title: String, children: [AccordionChild]) {
         self.hasAction = hasAction
         self.opened = opened
         self.title = title

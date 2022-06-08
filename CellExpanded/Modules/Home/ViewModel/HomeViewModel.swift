@@ -1,6 +1,11 @@
 import Foundation
 import UIKit
 
+enum NumbersEnum: Int {
+    case expanded = 0
+    case normal = 1
+}
+
 final class HomeViewModel {
     
     // MARK: - Private Properties
@@ -12,6 +17,35 @@ final class HomeViewModel {
     // MARK: - Init
     
     init() { setupInformations() }
+    
+    // MARK: - Public Methods
+    
+    func numberTest() -> Int {
+        return tableModel.count
+    }
+    
+    func numberOfSections() -> Int {
+        return 2
+    }
+    
+    func rowsForExpandedCell() -> Int {
+        if let item = tableViewData.first {
+            return item.opened ? 2 : 1
+        }
+        return 0
+    }
+    
+    func getCellExpanded() -> cellData? {
+        return tableViewData.first
+    }
+    
+    func getNormalCell(index: Int) -> Model {
+        return tableModel[index]
+    }
+    
+    func getAnotherCell() -> AccordionChild? {
+        return tableViewData.first?.children.first
+    }
     
     // MARK: - Private Methods
     

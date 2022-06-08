@@ -60,7 +60,8 @@ final class ModelCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             valueAccountLabel.topAnchor.constraint(equalTo: accountLabel.bottomAnchor, constant: 10),
-            valueAccountLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15)
+            valueAccountLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            valueAccountLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
         ])
     }
 }

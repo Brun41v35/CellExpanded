@@ -36,7 +36,7 @@ final class BalanceCell: UITableViewCell {
     
     // MARK: - Public Methods
     
-    func setupCell(title: String, value: String) {
+    func setupCell(title: String?, value: String) {
         titleLabel.text = title
         valueLabel.text = value
     }

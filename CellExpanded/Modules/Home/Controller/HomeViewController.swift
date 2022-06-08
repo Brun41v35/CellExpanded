@@ -40,38 +40,64 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return homeViewModel.tableViewData.count
+        return homeViewModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if homeViewModel.tableViewData[section].opened == true {
-            return homeViewModel.tableViewData[section].children.count + 1
-        } else {
-            return 1
+        let sectionEnum = NumbersEnum(rawValue: section)
+        
+        switch sectionEnum {
+        case .expanded:
+            return homeViewModel.rowsForExpandedCell()
+        case .normal:
+            return homeViewModel.numberTest()
+        case .none:
+            return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? BalanceCell else { return UITableViewCell() }
-            cell.setupCell(title: homeViewModel.tableViewData[indexPath.section].title, value: "testeSub")
+        
+        
+        let sectionEnum = NumbersEnum(rawValue: indexPath.section)
+        
+        switch sectionEnum {
+        case .expanded:
+            if indexPath.row == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? BalanceCell else { return UITableViewCell() }
+                
+                let data = homeViewModel.getCellExpanded()
+                
+                cell.setupCell(title: data?.title, value: "testeSub")
+                return cell
+            }
+            
+            if indexPath.row == 1 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "InformationCell") as? InformationCell else { return UITableViewCell() }
+                
+                let data = homeViewModel.getAnotherCell()
+                
+                cell.setupCell(account: "alou", valueAccount: "alou", multilimit: "alou", valueMultilimit: "alou")
+                return cell
+            }
+        case .normal:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ModelCell") as? ModelCell else { return UITableViewCell() }
+            
+            let data = homeViewModel.getNormalCell(index: indexPath.row)
+            
+            cell.setupCell(accountLabel: "Name", valueAccountLabel: "surname")
             return cell
+        case .none:
+            return UITableViewCell()
         }
         
-        if indexPath.row == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "InformationCell") as? InformationCell else { return UITableViewCell() }
-            cell.setupCell(account: "alou", valueAccount: "alou", multilimit: "alou", valueMultilimit: "alou")
-            return cell
-        }
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ModelCell") as? ModelCell else { return UITableViewCell() }
-        cell.setupCell(accountLabel: "Name", valueAccountLabel: "surname")
-        return cell
-        
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+                
+        
         if indexPath.row == 0 {
             if homeViewModel.tableViewData[indexPath.section].hasAction {
                 if homeViewModel.tableViewData[indexPath.section].opened == true {
